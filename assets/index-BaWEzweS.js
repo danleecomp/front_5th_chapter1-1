@@ -1,4 +1,4 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))i(o);new MutationObserver(o=>{for(const r of o)if(r.type==="childList")for(const l of r.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&i(l)}).observe(document,{childList:!0,subtree:!0});function s(o){const r={};return o.integrity&&(r.integrity=o.integrity),o.referrerPolicy&&(r.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?r.credentials="include":o.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(o){if(o.ep)return;o.ep=!0;const r=s(o);fetch(o.href,r)}})();const c=e=>{const t=e.isLoggedIn(),s=window.location.pathname;return`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const l of document.querySelectorAll('link[rel="modulepreload"]'))r(l);new MutationObserver(l=>{for(const o of l)if(o.type==="childList")for(const i of o.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function s(l){const o={};return l.integrity&&(o.integrity=l.integrity),l.referrerPolicy&&(o.referrerPolicy=l.referrerPolicy),l.crossOrigin==="use-credentials"?o.credentials="include":l.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function r(l){if(l.ep)return;l.ep=!0;const o=s(l);fetch(l.href,o)}})();const d=e=>{const t=e.isLoggedIn(),s=window.location.pathname;return`
       <header class="bg-blue-600 text-white p-4 sticky top-0">
         <h1 class="text-2xl font-bold">항해플러스</h1>
       </header>
@@ -9,14 +9,14 @@
           ${t?'<li><a href="#" id="logout" class="text-gray-600">로그아웃</a></li>':`<li><a href="/login" class="${s==="/login"?"text-blue-600 font-bold":"text-gray-600"}">로그인</a></li>`}
         </ul>
       </nav>
-    `},u=()=>`
+    `},c=()=>`
     <footer class="bg-gray-200 p-4 text-center">
         <p>&copy; 2024 항해플러스. All rights reserved.</p>
     </footer>
-    `,b=e=>{const t=e.getUser(),s=e.isLoggedIn();return`
+    `,u=e=>{const t=e.getUser(),s=e.isLoggedIn();return`
     <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
-        ${c(e)}
+        ${d(e)}
         <main class="p-4">
             <div class="mb-4 bg-white rounded-lg shadow p-4">
             <h1 class="text-2xl font-bold mb-4">환영합니다${s?", "+t.username+"님":""}!</h1>
@@ -106,10 +106,10 @@
             </div>
             </div>
         </main>
-        ${u()}
+        ${c()}
         </div>
     </div>
-    `},f=()=>`
+    `},b=()=>`
     <main class="bg-gray-100 flex items-center justify-center min-h-screen">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
@@ -124,10 +124,10 @@
         </form>
         </div>
     </main>
-    `,g=e=>{const t=e.getUser();return`
+    `,f=e=>{const t=e.getUser();return`
     <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
-        ${c(e)}
+        ${d(e)}
         <main class="p-4">
             <div class="bg-white p-8 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
@@ -189,7 +189,7 @@
             </form>
             </div>
         </main>
-        ${u()}
+        ${c()}
         </div>
     </div>
     `},m=()=>`
@@ -203,4 +203,4 @@
         </a>
         </div>
     </main>
-    `;function p(e){const t="/front_5th_chapter1-1/",s={"/":b,"/login":f,"/profile":g};function i(l){const n=t.endsWith("/")&&l.startsWith("/")?t+l.substring(1):t+l;history.pushState({},"",n),o()}function o(){let l=window.location.pathname;l.startsWith(t)&&(l=l.slice(t.endsWith("/")?t.length-1:t.length)),l===""&&(l="/"),l.startsWith("/")||(l="/"+l),console.log("현재 경로:",l);let n=s[l];if(l==="/profile"&&!e.isLoggedIn()){i("/login");return}else if(l==="/login"&&e.isLoggedIn()){i("/");return}n||(n=m),document.getElementById("root").innerHTML=n(e)}function r(){o(),window.addEventListener("popstate",o)}return{navigate:i,init:r}}function v(){let e=JSON.parse(localStorage.getItem("user"))||null;return{getUser(){return e},isLoggedIn(){return!!e},login(t){e=t,localStorage.setItem("user",JSON.stringify(e))},updateProfile(t){e={...e,...t},localStorage.setItem("user",JSON.stringify(e))},logout(){e=null,localStorage.removeItem("user")}}}const d=v(),a=p(d);document.addEventListener("click",e=>{if(e.target.id==="logout"&&(e.preventDefault(),console.log("로그아웃"),d.logout(),a.navigate("/login")),e.target.matches('a[href^="/"]')){e.preventDefault();const t=e.target.getAttribute("href");a.navigate(t)}});document.addEventListener("submit",e=>{if(e.preventDefault(),e.target.id==="login-form"){const t=e.target.querySelector("#username").value,s=e.target.querySelector("#bio").value||"";console.log("로그인:",{username:t,bio:s}),t&&(d.login({username:t,email:"",bio:s}),console.log("로그인 성공"),a.navigate("/profile"))}if(e.target.id==="profile-form"){const t=e.target.querySelector("#username").value,s=e.target.querySelector("#email").value||"",i=e.target.querySelector("#bio").value||"";console.log("프로필 업데이트:",{username:t,email:s,bio:i}),t&&(d.updateProfile({username:t,email:s,bio:i}),alert("프로필이 업데이트되었습니다!"),a.navigate("/profile"))}});a.init();
+    `;function g(e){let t;function s(o){history.pushState(null,null,o),r()}function r(){const o=window.location.pathname,i=document.getElementById("root");o==="/"?i.innerHTML=u(e):o==="/login"?i.innerHTML=b():o==="/profile"?i.innerHTML=f(e):i.innerHTML=m()}function l(){r(),window.addEventListener("popstate",r)}return t={navigate:s,init:l},t}function p(){let e=JSON.parse(localStorage.getItem("user"))||null;return{getUser(){return e},isLoggedIn(){return!!e},login(t){e=t,localStorage.setItem("user",JSON.stringify(e))},updateProfile(t){e={...e,...t},localStorage.setItem("user",JSON.stringify(e))},logout(){e=null,localStorage.removeItem("user")}}}const a=p(),n=g(a);document.addEventListener("click",e=>{if(e.target.id==="logout"&&(e.preventDefault(),console.log("로그아웃"),a.logout(),n.navigate("/login")),e.target.matches('a[href^="/"]')){e.preventDefault();const t=e.target.getAttribute("href");n.navigate(t)}});document.addEventListener("submit",e=>{if(e.preventDefault(),e.target.id==="login-form"){const t=e.target.querySelector("#username").value,s=e.target.querySelector("#bio").value||"";console.log("로그인:",{username:t,bio:s}),t&&(a.login({username:t,email:"",bio:s}),console.log("로그인 성공"),n.navigate("/profile"))}if(e.target.id==="profile-form"){const t=e.target.querySelector("#username").value,s=e.target.querySelector("#email").value||"",r=e.target.querySelector("#bio").value||"";console.log("프로필 업데이트:",{username:t,email:s,bio:r}),t&&(a.updateProfile({username:t,email:s,bio:r}),alert("프로필이 업데이트되었습니다!"),n.navigate("/profile"))}});n.init();
