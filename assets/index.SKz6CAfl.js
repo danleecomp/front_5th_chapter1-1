@@ -9,11 +9,11 @@
           ${e?'<li><a href="#" id="logout" class="text-gray-600">로그아웃</a></li>':`<li><a href="${o?"#/login":"/login"}" class="${r==="/login"?"text-blue-600 font-bold":"text-gray-600"}">로그인</a></li>`}
         </ul>
       </nav>
-    `},g=()=>`
+    `},p=()=>`
     <footer class="bg-gray-200 p-4 text-center">
         <p>&copy; 2024 항해플러스. All rights reserved.</p>
     </footer>
-    `,p=t=>{const e=t.getUser(),o=t.isLoggedIn();return`
+    `,g=t=>{const e=t.getUser(),o=t.isLoggedIn();return`
     <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
         ${f(t)}
@@ -106,7 +106,7 @@
             </div>
             </div>
         </main>
-        ${g()}
+        ${p()}
         </div>
     </div>
     `},m=()=>`
@@ -118,78 +118,81 @@
             <input type="text" id="username" placeholder="사용자 이름" class="w-full p-2 border rounded" required>
             </div>
             <div class="mb-4">
-            <textarea id="bio" placeholder="간단한 소개" class="w-full p-2 border rounded h-24" required></textarea>
+            <input type="password" id="password" placeholder="비밀번호" class="w-full p-2 border rounded" required>
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded font-bold">로그인</button>
         </form>
+        <div class="mt-4 text-center">
+            <a href="#" class="text-blue-600 text-sm">비밀번호를 잊으셨나요?</a>
+            <hr class="my-4 border-gray-200" />
+            <button class="bg-green-500 text-white px-4 py-2 rounded font-bold">새 계정 만들기</button>
+        </div>
         </div>
     </main>
     `,h=t=>{const e=t.getUser();return`
     <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
         ${f(t)}
-        <main class="p-4">
-            <div class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
-                내 프로필
-            </h2>
-            <form id="profile-form">
-                <div class="mb-4">
-                <label
-                    for="username"
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    >사용자 이름</label
-                >
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value="${(e==null?void 0:e.username)||""}"
-                    placeholder="이름을 입력해주세요."
-                    class="w-full p-2 border rounded"
-                    required
-                />
-                </div>
-                <div class="mb-4">
-                <label
-                    for="email"
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    >이메일</label
-                >
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value="${(e==null?void 0:e.email)||""}"
-                    placeholder="이메일을 입력해주세요."
-                    class="w-full p-2 border rounded"
-                />
-                </div>
-                <div class="mb-6">
-                <label
-                    for="bio"
-                    class="block text-gray-700 text-sm font-bold mb-2"
-                    >자기소개</label
-                >
-                <textarea
-                    id="bio"
-                    name="bio"
-                    rows="4"
-                    placeholder="자기소개를 입력해주세요."
-                    class="w-full p-2 border rounded"
-                    required
-                >${(e==null?void 0:e.bio)||""}</textarea>
-                </div>
-                <button
-                type="submit"
-                class="w-full bg-blue-600 text-white p-2 rounded font-bold"
-                >
-                프로필 업데이트
-                </button>
-            </form>
-            </div>
+        <main>
+          <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
+              내 프로필
+          </h2>
+          <form id="profile-form">
+              <div class="mb-4">
+              <label
+                  for="username"
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  >사용자 이름</label
+              >
+              <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value="${(e==null?void 0:e.username)||""}"
+                  placeholder="이름을 입력해주세요."
+                  class="w-full p-2 border rounded"
+                  required
+              />
+              </div>
+              <div class="mb-4">
+              <label
+                  for="email"
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  >이메일</label
+              >
+              <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value="${(e==null?void 0:e.email)||""}"
+                  placeholder="이메일을 입력해주세요."
+                  class="w-full p-2 border rounded"
+              />
+              </div>
+              <div class="mb-6">
+              <label
+                  for="bio"
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  >자기소개</label
+              >
+              <textarea
+                  id="bio"
+                  name="bio"
+                  rows="4"
+                  placeholder="자기소개를 입력해주세요."
+                  class="w-full p-2 border rounded"
+                  required
+              >${(e==null?void 0:e.bio)||""}</textarea>
+              </div>
+              <button
+              type="submit"
+              class="w-full bg-blue-600 text-white p-2 rounded font-bold"
+              >
+              프로필 업데이트
+              </button>
+          </form>
         </main>
-        ${g()}
+        ${p()}
         </div>
     </div>
     `},v=()=>`
@@ -197,10 +200,11 @@
         <div class="bg-white p-8 rounded-lg shadow-md w-full text-center" style="max-width: 480px">
         <h1 class="text-2xl font-bold text-blue-600 mb-4">항해플러스</h1>
         <p class="text-4xl font-bold text-gray-800 mb-4">404</p>
-        <p class="text-xl text-gray-600 mb-8">페이지를 찾을 수 없습니다</p>
+        <p class="text-xl text-gray-600 mb-4">페이지를 찾을 수 없습니다</p>
+        <p class="text-md text-gray-500 mb-8">요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.</p>
         <a href="${window.location.hash!==""?"#/":"/"}" class="bg-blue-600 text-white px-4 py-2 rounded font-bold">
             홈으로 돌아가기
         </a>
         </div>
     </main>
-    `;function x(t){const o="/front_5th_chapter1-1",r={"/":p,"/login":m,"/profile":h};function l(u){history.pushState({},"",o+u),s()}function s(){const c=window.location.pathname.replace(o,"")||"/";let i=r[c];c==="/profile"&&!t.isLoggedIn()?(history.pushState({},"",o+"/login"),i=r["/login"]):c==="/login"&&t.isLoggedIn()&&(history.pushState({},"",o+"/"),i=r["/"]),i||(i=v),document.getElementById("root").innerHTML=i(t)}function a(){s(),window.addEventListener("popstate",s)}return{navigate:l,init:a}}function y(){let t=JSON.parse(localStorage.getItem("user"))||null;return{getUser(){return t},isLoggedIn(){return!!t},login(e){t=e,localStorage.setItem("user",JSON.stringify(t))},updateProfile(e){t={...t,...e},localStorage.setItem("user",JSON.stringify(t))},logout(){t=null,localStorage.removeItem("user")}}}const d=y(),n=x(d),w=()=>"/front_5th_chapter1-1",b=w();document.addEventListener("click",t=>{if(t.target.id==="logout"&&(t.preventDefault(),console.log("로그아웃"),d.logout(),n.navigate("/login")),t.target.matches('a[href^="/"]')){t.preventDefault();let e=t.target.getAttribute("href");e.startsWith(b)&&(e=e.replace(b,"")),n.navigate(e)}});document.addEventListener("submit",t=>{if(t.preventDefault(),t.target.id==="login-form"){const e=t.target.querySelector("#username").value,o=t.target.querySelector("#bio").value||"";console.log("로그인:",{username:e,bio:o}),e&&(d.login({username:e,email:"",bio:o}),console.log("로그인 성공"),n.navigate("/profile"))}if(t.target.id==="profile-form"){const e=t.target.querySelector("#username").value,o=t.target.querySelector("#email").value||"",r=t.target.querySelector("#bio").value||"";console.log("프로필 업데이트:",{username:e,email:o,bio:r}),e&&(d.updateProfile({username:e,email:o,bio:r}),alert("프로필이 업데이트되었습니다!"),n.navigate("/profile"))}});n.init();
+    `;function x(t){const o="/front_5th_chapter1-1",r={"/":g,"/login":m,"/profile":h};function l(u){history.pushState({},"",o+u),s()}function s(){const c=window.location.pathname.replace(o,"")||"/";let n=r[c];c==="/profile"&&!t.isLoggedIn()?(history.pushState({},"",o+"/login"),n=r["/login"]):c==="/login"&&t.isLoggedIn()&&(history.pushState({},"",o+"/"),n=r["/"]),n||(n=v),document.getElementById("root").innerHTML=n(t)}function a(){s(),window.addEventListener("popstate",s)}return{navigate:l,init:a}}function y(){let t=JSON.parse(localStorage.getItem("user"))||null;return{getUser(){return t},isLoggedIn(){return!!t},login(e){t=e,localStorage.setItem("user",JSON.stringify(t))},updateProfile(e){t={...t,...e},localStorage.setItem("user",JSON.stringify(t))},logout(){t=null,localStorage.removeItem("user")}}}const d=y(),i=x(d),w=()=>"/front_5th_chapter1-1",b=w();document.addEventListener("click",t=>{if(t.target.id==="logout"&&(t.preventDefault(),console.log("로그아웃"),d.logout(),i.navigate("/login")),t.target.matches('a[href^="/"]')){t.preventDefault();let e=t.target.getAttribute("href");e.startsWith(b)&&(e=e.replace(b,"")),i.navigate(e)}});document.addEventListener("submit",t=>{if(t.preventDefault(),t.target.id==="login-form"){const e=t.target.querySelector("#username").value,o=t.target.querySelector("#password").value||"";console.log("로그인:",{username:e,password:o}),e&&(d.login({username:e,email:"",bio:"",password:o}),console.log("로그인 성공"),i.navigate("/profile"))}if(t.target.id==="profile-form"){const e=t.target.querySelector("#username").value,o=t.target.querySelector("#email").value||"",r=t.target.querySelector("#bio").value||"";console.log("프로필 업데이트:",{username:e,email:o,bio:r}),e&&(d.updateProfile({username:e,email:o,bio:r+" "+r}),alert("프로필이 업데이트되었습니다!"),i.navigate("/profile"))}});i.init();
